@@ -78,7 +78,7 @@ model highlights {
   start_offset Int?
   end_offset   Int?
 
-  color String? // 추후 회의 거쳐서 enum/type으로 바뀔 여지 있음
+  color String? // TODO: 추후 회의 거쳐서 enum/type으로 바뀔 여지 있음
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
