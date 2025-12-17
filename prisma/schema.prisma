@@ -1,0 +1,179 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoomRole {
+  OWNER
+  MEMBER
+}
+
+model users {
+  id       String  @id @default(cuid())
+  email    String  @unique
+  password String?
+  nickname String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  highlights    highlights[]
+  notes         notes[]
+  note_likes    note_likes[]
+  room_members  room_members[]
+  user_progress user_progress[]
+  owned_rooms   rooms[]         @relation("room_owner")
+}
+
+model documents {
+  id         String @id @default(cuid())
+  hashed_url String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  anchors       anchors[]
+  user_progress user_progress[]
+}
+
+model anchors {
+  id          String @id @default(cuid())
+  document_id String
+  fingerprint String
+
+  selected_text  String?
+  context_before String?
+  context_after  String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  document   documents    @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  highlights highlights[]
+  notes      notes[]
+
+  @@unique([document_id, fingerprint])
+  @@index([document_id])
+}
+
+model highlights {
+  id        String @id @default(cuid())
+  user_id   String
+  anchor_id String
+
+  start_offset Int?
+  end_offset   Int?
+
+  color String? // 추후 회의 거쳐서 enum/type으로 바뀔 여지 있음
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  user   users   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  anchor anchors @relation(fields: [anchor_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@index([anchor_id])
+}
+
+model notes {
+  id        String @id @default(cuid())
+  user_id   String
+  anchor_id String
+  content   String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  user       users        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  anchor     anchors      @relation(fields: [anchor_id], references: [id], onDelete: Cascade)
+  note_likes note_likes[]
+
+  @@index([user_id])
+  @@index([anchor_id])
+}
+
+model note_likes {
+  id      String @id @default(cuid())
+  user_id String
+  note_id String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  user users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  note notes @relation(fields: [note_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, note_id])
+  @@index([note_id])
+  @@index([user_id])
+}
+
+model rooms {
+  id            String @id @default(cuid())
+  owner_user_id String
+  invite_link   String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  owner        users          @relation("room_owner", fields: [owner_user_id], references: [id], onDelete: Cascade)
+  room_members room_members[]
+}
+
+model room_members {
+  id      String   @id @default(cuid())
+  room_id String
+  user_id String
+  role    RoomRole @default(MEMBER)
+
+  joined_at  DateTime @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  room rooms @relation(fields: [room_id], references: [id], onDelete: Cascade)
+  user users @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([room_id, user_id])
+  @@index([room_id])
+  @@index([user_id])
+}
+
+model user_progress {
+  id             String  @id @default(cuid())
+  user_id        String
+  document_id    String
+  last_anchor_id String?
+  percent        Int?
+  status         String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  // relations
+  user     users     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  document documents @relation(fields: [document_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, document_id])
+  @@index([user_id])
+  @@index([document_id])
+}
