@@ -10,7 +10,6 @@
 export type * from './models/users.js'
 export type * from './models/documents.js'
 export type * from './models/anchors.js'
-export type * from './models/highlights.js'
 export type * from './models/notes.js'
 export type * from './models/note_likes.js'
 export type * from './models/rooms.js'

@@ -32,11 +32,6 @@ export type documents = Prisma.documentsModel
  */
 export type anchors = Prisma.anchorsModel
 /**
- * Model highlights
- * 
- */
-export type highlights = Prisma.highlightsModel
-/**
  * Model notes
  * 
  */

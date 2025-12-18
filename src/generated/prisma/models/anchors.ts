@@ -206,7 +206,6 @@ export type anchorsWhereInput = {
   created_at?: Prisma.DateTimeFilter<"anchors"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"anchors"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentsScalarRelationFilter, Prisma.documentsWhereInput>
-  highlights?: Prisma.HighlightsListRelationFilter
   notes?: Prisma.NotesListRelationFilter
 }
 
@@ -220,7 +219,6 @@ export type anchorsOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   document?: Prisma.documentsOrderByWithRelationInput
-  highlights?: Prisma.highlightsOrderByRelationAggregateInput
   notes?: Prisma.notesOrderByRelationAggregateInput
 }
 
@@ -238,7 +236,6 @@ export type anchorsWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"anchors"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"anchors"> | Date | string
   document?: Prisma.XOR<Prisma.DocumentsScalarRelationFilter, Prisma.documentsWhereInput>
-  highlights?: Prisma.HighlightsListRelationFilter
   notes?: Prisma.NotesListRelationFilter
 }, "id" | "document_id_fingerprint">
 
@@ -279,7 +276,6 @@ export type anchorsCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   document: Prisma.documentsCreateNestedOneWithoutAnchorsInput
-  highlights?: Prisma.highlightsCreateNestedManyWithoutAnchorInput
   notes?: Prisma.notesCreateNestedManyWithoutAnchorInput
 }
 
@@ -292,7 +288,6 @@ export type anchorsUncheckedCreateInput = {
   context_after?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutAnchorInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutAnchorInput
 }
 
@@ -305,7 +300,6 @@ export type anchorsUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.documentsUpdateOneRequiredWithoutAnchorsNestedInput
-  highlights?: Prisma.highlightsUpdateManyWithoutAnchorNestedInput
   notes?: Prisma.notesUpdateManyWithoutAnchorNestedInput
 }
 
@@ -318,7 +312,6 @@ export type anchorsUncheckedUpdateInput = {
   context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutAnchorNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutAnchorNestedInput
 }
 
@@ -449,20 +442,6 @@ export type anchorsUncheckedUpdateManyWithoutDocumentNestedInput = {
   deleteMany?: Prisma.anchorsScalarWhereInput | Prisma.anchorsScalarWhereInput[]
 }
 
-export type anchorsCreateNestedOneWithoutHighlightsInput = {
-  create?: Prisma.XOR<Prisma.anchorsCreateWithoutHighlightsInput, Prisma.anchorsUncheckedCreateWithoutHighlightsInput>
-  connectOrCreate?: Prisma.anchorsCreateOrConnectWithoutHighlightsInput
-  connect?: Prisma.anchorsWhereUniqueInput
-}
-
-export type anchorsUpdateOneRequiredWithoutHighlightsNestedInput = {
-  create?: Prisma.XOR<Prisma.anchorsCreateWithoutHighlightsInput, Prisma.anchorsUncheckedCreateWithoutHighlightsInput>
-  connectOrCreate?: Prisma.anchorsCreateOrConnectWithoutHighlightsInput
-  upsert?: Prisma.anchorsUpsertWithoutHighlightsInput
-  connect?: Prisma.anchorsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.anchorsUpdateToOneWithWhereWithoutHighlightsInput, Prisma.anchorsUpdateWithoutHighlightsInput>, Prisma.anchorsUncheckedUpdateWithoutHighlightsInput>
-}
-
 export type anchorsCreateNestedOneWithoutNotesInput = {
   create?: Prisma.XOR<Prisma.anchorsCreateWithoutNotesInput, Prisma.anchorsUncheckedCreateWithoutNotesInput>
   connectOrCreate?: Prisma.anchorsCreateOrConnectWithoutNotesInput
@@ -485,7 +464,6 @@ export type anchorsCreateWithoutDocumentInput = {
   context_after?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutAnchorInput
   notes?: Prisma.notesCreateNestedManyWithoutAnchorInput
 }
 
@@ -497,7 +475,6 @@ export type anchorsUncheckedCreateWithoutDocumentInput = {
   context_after?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutAnchorInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutAnchorInput
 }
 
@@ -541,70 +518,6 @@ export type anchorsScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"anchors"> | Date | string
 }
 
-export type anchorsCreateWithoutHighlightsInput = {
-  id?: string
-  fingerprint: string
-  selected_text?: string | null
-  context_before?: string | null
-  context_after?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  document: Prisma.documentsCreateNestedOneWithoutAnchorsInput
-  notes?: Prisma.notesCreateNestedManyWithoutAnchorInput
-}
-
-export type anchorsUncheckedCreateWithoutHighlightsInput = {
-  id?: string
-  document_id: string
-  fingerprint: string
-  selected_text?: string | null
-  context_before?: string | null
-  context_after?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  notes?: Prisma.notesUncheckedCreateNestedManyWithoutAnchorInput
-}
-
-export type anchorsCreateOrConnectWithoutHighlightsInput = {
-  where: Prisma.anchorsWhereUniqueInput
-  create: Prisma.XOR<Prisma.anchorsCreateWithoutHighlightsInput, Prisma.anchorsUncheckedCreateWithoutHighlightsInput>
-}
-
-export type anchorsUpsertWithoutHighlightsInput = {
-  update: Prisma.XOR<Prisma.anchorsUpdateWithoutHighlightsInput, Prisma.anchorsUncheckedUpdateWithoutHighlightsInput>
-  create: Prisma.XOR<Prisma.anchorsCreateWithoutHighlightsInput, Prisma.anchorsUncheckedCreateWithoutHighlightsInput>
-  where?: Prisma.anchorsWhereInput
-}
-
-export type anchorsUpdateToOneWithWhereWithoutHighlightsInput = {
-  where?: Prisma.anchorsWhereInput
-  data: Prisma.XOR<Prisma.anchorsUpdateWithoutHighlightsInput, Prisma.anchorsUncheckedUpdateWithoutHighlightsInput>
-}
-
-export type anchorsUpdateWithoutHighlightsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  fingerprint?: Prisma.StringFieldUpdateOperationsInput | string
-  selected_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  context_before?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  document?: Prisma.documentsUpdateOneRequiredWithoutAnchorsNestedInput
-  notes?: Prisma.notesUpdateManyWithoutAnchorNestedInput
-}
-
-export type anchorsUncheckedUpdateWithoutHighlightsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  document_id?: Prisma.StringFieldUpdateOperationsInput | string
-  fingerprint?: Prisma.StringFieldUpdateOperationsInput | string
-  selected_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  context_before?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  notes?: Prisma.notesUncheckedUpdateManyWithoutAnchorNestedInput
-}
-
 export type anchorsCreateWithoutNotesInput = {
   id?: string
   fingerprint: string
@@ -614,7 +527,6 @@ export type anchorsCreateWithoutNotesInput = {
   created_at?: Date | string
   updated_at?: Date | string
   document: Prisma.documentsCreateNestedOneWithoutAnchorsInput
-  highlights?: Prisma.highlightsCreateNestedManyWithoutAnchorInput
 }
 
 export type anchorsUncheckedCreateWithoutNotesInput = {
@@ -626,7 +538,6 @@ export type anchorsUncheckedCreateWithoutNotesInput = {
   context_after?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutAnchorInput
 }
 
 export type anchorsCreateOrConnectWithoutNotesInput = {
@@ -654,7 +565,6 @@ export type anchorsUpdateWithoutNotesInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.documentsUpdateOneRequiredWithoutAnchorsNestedInput
-  highlights?: Prisma.highlightsUpdateManyWithoutAnchorNestedInput
 }
 
 export type anchorsUncheckedUpdateWithoutNotesInput = {
@@ -666,7 +576,6 @@ export type anchorsUncheckedUpdateWithoutNotesInput = {
   context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutAnchorNestedInput
 }
 
 export type anchorsCreateManyDocumentInput = {
@@ -687,7 +596,6 @@ export type anchorsUpdateWithoutDocumentInput = {
   context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutAnchorNestedInput
   notes?: Prisma.notesUpdateManyWithoutAnchorNestedInput
 }
 
@@ -699,7 +607,6 @@ export type anchorsUncheckedUpdateWithoutDocumentInput = {
   context_after?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutAnchorNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutAnchorNestedInput
 }
 
@@ -719,12 +626,10 @@ export type anchorsUncheckedUpdateManyWithoutDocumentInput = {
  */
 
 export type AnchorsCountOutputType = {
-  highlights: number
   notes: number
 }
 
 export type AnchorsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  highlights?: boolean | AnchorsCountOutputTypeCountHighlightsArgs
   notes?: boolean | AnchorsCountOutputTypeCountNotesArgs
 }
 
@@ -736,13 +641,6 @@ export type AnchorsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
    * Select specific fields to fetch from the AnchorsCountOutputType
    */
   select?: Prisma.AnchorsCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * AnchorsCountOutputType without action
- */
-export type AnchorsCountOutputTypeCountHighlightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.highlightsWhereInput
 }
 
 /**
@@ -763,7 +661,6 @@ export type anchorsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   created_at?: boolean
   updated_at?: boolean
   document?: boolean | Prisma.documentsDefaultArgs<ExtArgs>
-  highlights?: boolean | Prisma.anchors$highlightsArgs<ExtArgs>
   notes?: boolean | Prisma.anchors$notesArgs<ExtArgs>
   _count?: boolean | Prisma.AnchorsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["anchors"]>
@@ -806,7 +703,6 @@ export type anchorsSelectScalar = {
 export type anchorsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "document_id" | "fingerprint" | "selected_text" | "context_before" | "context_after" | "created_at" | "updated_at", ExtArgs["result"]["anchors"]>
 export type anchorsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   document?: boolean | Prisma.documentsDefaultArgs<ExtArgs>
-  highlights?: boolean | Prisma.anchors$highlightsArgs<ExtArgs>
   notes?: boolean | Prisma.anchors$notesArgs<ExtArgs>
   _count?: boolean | Prisma.AnchorsCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -821,7 +717,6 @@ export type $anchorsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "anchors"
   objects: {
     document: Prisma.$documentsPayload<ExtArgs>
-    highlights: Prisma.$highlightsPayload<ExtArgs>[]
     notes: Prisma.$notesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1228,7 +1123,6 @@ readonly fields: anchorsFieldRefs;
 export interface Prisma__anchorsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   document<T extends Prisma.documentsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.documentsDefaultArgs<ExtArgs>>): Prisma.Prisma__documentsClient<runtime.Types.Result.GetResult<Prisma.$documentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  highlights<T extends Prisma.anchors$highlightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.anchors$highlightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$highlightsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.anchors$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.anchors$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$notesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1660,30 +1554,6 @@ export type anchorsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many anchors to delete.
    */
   limit?: number
-}
-
-/**
- * anchors.highlights
- */
-export type anchors$highlightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the highlights
-   */
-  select?: Prisma.highlightsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the highlights
-   */
-  omit?: Prisma.highlightsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.highlightsInclude<ExtArgs> | null
-  where?: Prisma.highlightsWhereInput
-  orderBy?: Prisma.highlightsOrderByWithRelationInput | Prisma.highlightsOrderByWithRelationInput[]
-  cursor?: Prisma.highlightsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.HighlightsScalarFieldEnum | Prisma.HighlightsScalarFieldEnum[]
 }
 
 /**
