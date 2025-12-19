@@ -51,7 +51,6 @@ export const ModelName = {
   users: 'users',
   documents: 'documents',
   anchors: 'anchors',
-  highlights: 'highlights',
   notes: 'notes',
   note_likes: 'note_likes',
   rooms: 'rooms',
@@ -111,25 +110,13 @@ export const AnchorsScalarFieldEnum = {
 export type AnchorsScalarFieldEnum = (typeof AnchorsScalarFieldEnum)[keyof typeof AnchorsScalarFieldEnum]
 
 
-export const HighlightsScalarFieldEnum = {
-  id: 'id',
-  user_id: 'user_id',
-  anchor_id: 'anchor_id',
-  start_offset: 'start_offset',
-  end_offset: 'end_offset',
-  color: 'color',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type HighlightsScalarFieldEnum = (typeof HighlightsScalarFieldEnum)[keyof typeof HighlightsScalarFieldEnum]
-
-
 export const NotesScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   anchor_id: 'anchor_id',
   content: 'content',
+  start_offset: 'start_offset',
+  end_offset: 'end_offset',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const

@@ -19,8 +19,20 @@ export type notesModel = runtime.Types.Result.DefaultSelection<Prisma.$notesPayl
 
 export type AggregateNotes = {
   _count: NotesCountAggregateOutputType | null
+  _avg: NotesAvgAggregateOutputType | null
+  _sum: NotesSumAggregateOutputType | null
   _min: NotesMinAggregateOutputType | null
   _max: NotesMaxAggregateOutputType | null
+}
+
+export type NotesAvgAggregateOutputType = {
+  start_offset: number | null
+  end_offset: number | null
+}
+
+export type NotesSumAggregateOutputType = {
+  start_offset: number | null
+  end_offset: number | null
 }
 
 export type NotesMinAggregateOutputType = {
@@ -28,6 +40,8 @@ export type NotesMinAggregateOutputType = {
   user_id: string | null
   anchor_id: string | null
   content: string | null
+  start_offset: number | null
+  end_offset: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -37,6 +51,8 @@ export type NotesMaxAggregateOutputType = {
   user_id: string | null
   anchor_id: string | null
   content: string | null
+  start_offset: number | null
+  end_offset: number | null
   created_at: Date | null
   updated_at: Date | null
 }
@@ -46,17 +62,31 @@ export type NotesCountAggregateOutputType = {
   user_id: number
   anchor_id: number
   content: number
+  start_offset: number
+  end_offset: number
   created_at: number
   updated_at: number
   _all: number
 }
 
 
+export type NotesAvgAggregateInputType = {
+  start_offset?: true
+  end_offset?: true
+}
+
+export type NotesSumAggregateInputType = {
+  start_offset?: true
+  end_offset?: true
+}
+
 export type NotesMinAggregateInputType = {
   id?: true
   user_id?: true
   anchor_id?: true
   content?: true
+  start_offset?: true
+  end_offset?: true
   created_at?: true
   updated_at?: true
 }
@@ -66,6 +96,8 @@ export type NotesMaxAggregateInputType = {
   user_id?: true
   anchor_id?: true
   content?: true
+  start_offset?: true
+  end_offset?: true
   created_at?: true
   updated_at?: true
 }
@@ -75,6 +107,8 @@ export type NotesCountAggregateInputType = {
   user_id?: true
   anchor_id?: true
   content?: true
+  start_offset?: true
+  end_offset?: true
   created_at?: true
   updated_at?: true
   _all?: true
@@ -118,6 +152,18 @@ export type NotesAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: NotesAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: NotesSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: NotesMinAggregateInputType
@@ -148,6 +194,8 @@ export type notesGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: NotesCountAggregateInputType | true
+  _avg?: NotesAvgAggregateInputType
+  _sum?: NotesSumAggregateInputType
   _min?: NotesMinAggregateInputType
   _max?: NotesMaxAggregateInputType
 }
@@ -157,9 +205,13 @@ export type NotesGroupByOutputType = {
   user_id: string
   anchor_id: string
   content: string
+  start_offset: number | null
+  end_offset: number | null
   created_at: Date
   updated_at: Date
   _count: NotesCountAggregateOutputType | null
+  _avg: NotesAvgAggregateOutputType | null
+  _sum: NotesSumAggregateOutputType | null
   _min: NotesMinAggregateOutputType | null
   _max: NotesMaxAggregateOutputType | null
 }
@@ -187,6 +239,8 @@ export type notesWhereInput = {
   user_id?: Prisma.StringFilter<"notes"> | string
   anchor_id?: Prisma.StringFilter<"notes"> | string
   content?: Prisma.StringFilter<"notes"> | string
+  start_offset?: Prisma.IntNullableFilter<"notes"> | number | null
+  end_offset?: Prisma.IntNullableFilter<"notes"> | number | null
   created_at?: Prisma.DateTimeFilter<"notes"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"notes"> | Date | string
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
@@ -199,6 +253,8 @@ export type notesOrderByWithRelationInput = {
   user_id?: Prisma.SortOrder
   anchor_id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  start_offset?: Prisma.SortOrderInput | Prisma.SortOrder
+  end_offset?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   user?: Prisma.usersOrderByWithRelationInput
@@ -214,6 +270,8 @@ export type notesWhereUniqueInput = Prisma.AtLeast<{
   user_id?: Prisma.StringFilter<"notes"> | string
   anchor_id?: Prisma.StringFilter<"notes"> | string
   content?: Prisma.StringFilter<"notes"> | string
+  start_offset?: Prisma.IntNullableFilter<"notes"> | number | null
+  end_offset?: Prisma.IntNullableFilter<"notes"> | number | null
   created_at?: Prisma.DateTimeFilter<"notes"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"notes"> | Date | string
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
@@ -226,11 +284,15 @@ export type notesOrderByWithAggregationInput = {
   user_id?: Prisma.SortOrder
   anchor_id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  start_offset?: Prisma.SortOrderInput | Prisma.SortOrder
+  end_offset?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   _count?: Prisma.notesCountOrderByAggregateInput
+  _avg?: Prisma.notesAvgOrderByAggregateInput
   _max?: Prisma.notesMaxOrderByAggregateInput
   _min?: Prisma.notesMinOrderByAggregateInput
+  _sum?: Prisma.notesSumOrderByAggregateInput
 }
 
 export type notesScalarWhereWithAggregatesInput = {
@@ -241,6 +303,8 @@ export type notesScalarWhereWithAggregatesInput = {
   user_id?: Prisma.StringWithAggregatesFilter<"notes"> | string
   anchor_id?: Prisma.StringWithAggregatesFilter<"notes"> | string
   content?: Prisma.StringWithAggregatesFilter<"notes"> | string
+  start_offset?: Prisma.IntNullableWithAggregatesFilter<"notes"> | number | null
+  end_offset?: Prisma.IntNullableWithAggregatesFilter<"notes"> | number | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"notes"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"notes"> | Date | string
 }
@@ -248,6 +312,8 @@ export type notesScalarWhereWithAggregatesInput = {
 export type notesCreateInput = {
   id?: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.usersCreateNestedOneWithoutNotesInput
@@ -260,6 +326,8 @@ export type notesUncheckedCreateInput = {
   user_id: string
   anchor_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutNoteInput
@@ -268,6 +336,8 @@ export type notesUncheckedCreateInput = {
 export type notesUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.usersUpdateOneRequiredWithoutNotesNestedInput
@@ -280,6 +350,8 @@ export type notesUncheckedUpdateInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   anchor_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutNoteNestedInput
@@ -290,6 +362,8 @@ export type notesCreateManyInput = {
   user_id: string
   anchor_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -297,6 +371,8 @@ export type notesCreateManyInput = {
 export type notesUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -306,6 +382,8 @@ export type notesUncheckedUpdateManyInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   anchor_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -325,8 +403,15 @@ export type notesCountOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   anchor_id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  start_offset?: Prisma.SortOrder
+  end_offset?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+}
+
+export type notesAvgOrderByAggregateInput = {
+  start_offset?: Prisma.SortOrder
+  end_offset?: Prisma.SortOrder
 }
 
 export type notesMaxOrderByAggregateInput = {
@@ -334,6 +419,8 @@ export type notesMaxOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   anchor_id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  start_offset?: Prisma.SortOrder
+  end_offset?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
 }
@@ -343,8 +430,15 @@ export type notesMinOrderByAggregateInput = {
   user_id?: Prisma.SortOrder
   anchor_id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  start_offset?: Prisma.SortOrder
+  end_offset?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+}
+
+export type notesSumOrderByAggregateInput = {
+  start_offset?: Prisma.SortOrder
+  end_offset?: Prisma.SortOrder
 }
 
 export type NotesScalarRelationFilter = {
@@ -436,6 +530,14 @@ export type notesUncheckedUpdateManyWithoutAnchorNestedInput = {
   deleteMany?: Prisma.notesScalarWhereInput | Prisma.notesScalarWhereInput[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type notesCreateNestedOneWithoutNote_likesInput = {
   create?: Prisma.XOR<Prisma.notesCreateWithoutNote_likesInput, Prisma.notesUncheckedCreateWithoutNote_likesInput>
   connectOrCreate?: Prisma.notesCreateOrConnectWithoutNote_likesInput
@@ -453,6 +555,8 @@ export type notesUpdateOneRequiredWithoutNote_likesNestedInput = {
 export type notesCreateWithoutUserInput = {
   id?: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   anchor: Prisma.anchorsCreateNestedOneWithoutNotesInput
@@ -463,6 +567,8 @@ export type notesUncheckedCreateWithoutUserInput = {
   id?: string
   anchor_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutNoteInput
@@ -502,6 +608,8 @@ export type notesScalarWhereInput = {
   user_id?: Prisma.StringFilter<"notes"> | string
   anchor_id?: Prisma.StringFilter<"notes"> | string
   content?: Prisma.StringFilter<"notes"> | string
+  start_offset?: Prisma.IntNullableFilter<"notes"> | number | null
+  end_offset?: Prisma.IntNullableFilter<"notes"> | number | null
   created_at?: Prisma.DateTimeFilter<"notes"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"notes"> | Date | string
 }
@@ -509,6 +617,8 @@ export type notesScalarWhereInput = {
 export type notesCreateWithoutAnchorInput = {
   id?: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.usersCreateNestedOneWithoutNotesInput
@@ -519,6 +629,8 @@ export type notesUncheckedCreateWithoutAnchorInput = {
   id?: string
   user_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutNoteInput
@@ -553,6 +665,8 @@ export type notesUpdateManyWithWhereWithoutAnchorInput = {
 export type notesCreateWithoutNote_likesInput = {
   id?: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
   user: Prisma.usersCreateNestedOneWithoutNotesInput
@@ -564,6 +678,8 @@ export type notesUncheckedCreateWithoutNote_likesInput = {
   user_id: string
   anchor_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -587,6 +703,8 @@ export type notesUpdateToOneWithWhereWithoutNote_likesInput = {
 export type notesUpdateWithoutNote_likesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.usersUpdateOneRequiredWithoutNotesNestedInput
@@ -598,6 +716,8 @@ export type notesUncheckedUpdateWithoutNote_likesInput = {
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   anchor_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -606,6 +726,8 @@ export type notesCreateManyUserInput = {
   id?: string
   anchor_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -613,6 +735,8 @@ export type notesCreateManyUserInput = {
 export type notesUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   anchor?: Prisma.anchorsUpdateOneRequiredWithoutNotesNestedInput
@@ -623,6 +747,8 @@ export type notesUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   anchor_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutNoteNestedInput
@@ -632,6 +758,8 @@ export type notesUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   anchor_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -640,6 +768,8 @@ export type notesCreateManyAnchorInput = {
   id?: string
   user_id: string
   content: string
+  start_offset?: number | null
+  end_offset?: number | null
   created_at?: Date | string
   updated_at?: Date | string
 }
@@ -647,6 +777,8 @@ export type notesCreateManyAnchorInput = {
 export type notesUpdateWithoutAnchorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.usersUpdateOneRequiredWithoutNotesNestedInput
@@ -657,6 +789,8 @@ export type notesUncheckedUpdateWithoutAnchorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutNoteNestedInput
@@ -666,6 +800,8 @@ export type notesUncheckedUpdateManyWithoutAnchorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   user_id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  start_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  end_offset?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -706,6 +842,8 @@ export type notesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   user_id?: boolean
   anchor_id?: boolean
   content?: boolean
+  start_offset?: boolean
+  end_offset?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.usersDefaultArgs<ExtArgs>
@@ -719,6 +857,8 @@ export type notesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   user_id?: boolean
   anchor_id?: boolean
   content?: boolean
+  start_offset?: boolean
+  end_offset?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.usersDefaultArgs<ExtArgs>
@@ -730,6 +870,8 @@ export type notesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   user_id?: boolean
   anchor_id?: boolean
   content?: boolean
+  start_offset?: boolean
+  end_offset?: boolean
   created_at?: boolean
   updated_at?: boolean
   user?: boolean | Prisma.usersDefaultArgs<ExtArgs>
@@ -741,11 +883,13 @@ export type notesSelectScalar = {
   user_id?: boolean
   anchor_id?: boolean
   content?: boolean
+  start_offset?: boolean
+  end_offset?: boolean
   created_at?: boolean
   updated_at?: boolean
 }
 
-export type notesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "anchor_id" | "content" | "created_at" | "updated_at", ExtArgs["result"]["notes"]>
+export type notesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "anchor_id" | "content" | "start_offset" | "end_offset" | "created_at" | "updated_at", ExtArgs["result"]["notes"]>
 export type notesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.usersDefaultArgs<ExtArgs>
   anchor?: boolean | Prisma.anchorsDefaultArgs<ExtArgs>
@@ -773,6 +917,8 @@ export type $notesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     user_id: string
     anchor_id: string
     content: string
+    start_offset: number | null
+    end_offset: number | null
     created_at: Date
     updated_at: Date
   }, ExtArgs["result"]["notes"]>
@@ -1205,6 +1351,8 @@ export interface notesFieldRefs {
   readonly user_id: Prisma.FieldRef<"notes", 'String'>
   readonly anchor_id: Prisma.FieldRef<"notes", 'String'>
   readonly content: Prisma.FieldRef<"notes", 'String'>
+  readonly start_offset: Prisma.FieldRef<"notes", 'Int'>
+  readonly end_offset: Prisma.FieldRef<"notes", 'Int'>
   readonly created_at: Prisma.FieldRef<"notes", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"notes", 'DateTime'>
 }

@@ -189,7 +189,6 @@ export type usersWhereInput = {
   nickname?: Prisma.StringNullableFilter<"users"> | string | null
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
-  highlights?: Prisma.HighlightsListRelationFilter
   notes?: Prisma.NotesListRelationFilter
   note_likes?: Prisma.Note_likesListRelationFilter
   room_members?: Prisma.Room_membersListRelationFilter
@@ -204,7 +203,6 @@ export type usersOrderByWithRelationInput = {
   nickname?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
-  highlights?: Prisma.highlightsOrderByRelationAggregateInput
   notes?: Prisma.notesOrderByRelationAggregateInput
   note_likes?: Prisma.note_likesOrderByRelationAggregateInput
   room_members?: Prisma.room_membersOrderByRelationAggregateInput
@@ -222,7 +220,6 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   nickname?: Prisma.StringNullableFilter<"users"> | string | null
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
-  highlights?: Prisma.HighlightsListRelationFilter
   notes?: Prisma.NotesListRelationFilter
   note_likes?: Prisma.Note_likesListRelationFilter
   room_members?: Prisma.Room_membersListRelationFilter
@@ -261,7 +258,6 @@ export type usersCreateInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   notes?: Prisma.notesCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
@@ -276,7 +272,6 @@ export type usersUncheckedCreateInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
@@ -291,7 +286,6 @@ export type usersUpdateInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
@@ -306,7 +300,6 @@ export type usersUncheckedUpdateInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
@@ -385,20 +378,6 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type usersCreateNestedOneWithoutHighlightsInput = {
-  create?: Prisma.XOR<Prisma.usersCreateWithoutHighlightsInput, Prisma.usersUncheckedCreateWithoutHighlightsInput>
-  connectOrCreate?: Prisma.usersCreateOrConnectWithoutHighlightsInput
-  connect?: Prisma.usersWhereUniqueInput
-}
-
-export type usersUpdateOneRequiredWithoutHighlightsNestedInput = {
-  create?: Prisma.XOR<Prisma.usersCreateWithoutHighlightsInput, Prisma.usersUncheckedCreateWithoutHighlightsInput>
-  connectOrCreate?: Prisma.usersCreateOrConnectWithoutHighlightsInput
-  upsert?: Prisma.usersUpsertWithoutHighlightsInput
-  connect?: Prisma.usersWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutHighlightsInput, Prisma.usersUpdateWithoutHighlightsInput>, Prisma.usersUncheckedUpdateWithoutHighlightsInput>
-}
-
 export type usersCreateNestedOneWithoutNotesInput = {
   create?: Prisma.XOR<Prisma.usersCreateWithoutNotesInput, Prisma.usersUncheckedCreateWithoutNotesInput>
   connectOrCreate?: Prisma.usersCreateOrConnectWithoutNotesInput
@@ -469,78 +448,6 @@ export type usersUpdateOneRequiredWithoutUser_progressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutUser_progressInput, Prisma.usersUpdateWithoutUser_progressInput>, Prisma.usersUncheckedUpdateWithoutUser_progressInput>
 }
 
-export type usersCreateWithoutHighlightsInput = {
-  id?: string
-  email: string
-  password?: string | null
-  nickname?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  notes?: Prisma.notesCreateNestedManyWithoutUserInput
-  note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
-  room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
-  user_progress?: Prisma.user_progressCreateNestedManyWithoutUserInput
-  owned_rooms?: Prisma.roomsCreateNestedManyWithoutOwnerInput
-}
-
-export type usersUncheckedCreateWithoutHighlightsInput = {
-  id?: string
-  email: string
-  password?: string | null
-  nickname?: string | null
-  created_at?: Date | string
-  updated_at?: Date | string
-  notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
-  note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
-  room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
-  user_progress?: Prisma.user_progressUncheckedCreateNestedManyWithoutUserInput
-  owned_rooms?: Prisma.roomsUncheckedCreateNestedManyWithoutOwnerInput
-}
-
-export type usersCreateOrConnectWithoutHighlightsInput = {
-  where: Prisma.usersWhereUniqueInput
-  create: Prisma.XOR<Prisma.usersCreateWithoutHighlightsInput, Prisma.usersUncheckedCreateWithoutHighlightsInput>
-}
-
-export type usersUpsertWithoutHighlightsInput = {
-  update: Prisma.XOR<Prisma.usersUpdateWithoutHighlightsInput, Prisma.usersUncheckedUpdateWithoutHighlightsInput>
-  create: Prisma.XOR<Prisma.usersCreateWithoutHighlightsInput, Prisma.usersUncheckedCreateWithoutHighlightsInput>
-  where?: Prisma.usersWhereInput
-}
-
-export type usersUpdateToOneWithWhereWithoutHighlightsInput = {
-  where?: Prisma.usersWhereInput
-  data: Prisma.XOR<Prisma.usersUpdateWithoutHighlightsInput, Prisma.usersUncheckedUpdateWithoutHighlightsInput>
-}
-
-export type usersUpdateWithoutHighlightsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  notes?: Prisma.notesUpdateManyWithoutUserNestedInput
-  note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
-  room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
-  user_progress?: Prisma.user_progressUpdateManyWithoutUserNestedInput
-  owned_rooms?: Prisma.roomsUpdateManyWithoutOwnerNestedInput
-}
-
-export type usersUncheckedUpdateWithoutHighlightsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
-  note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
-  room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
-  user_progress?: Prisma.user_progressUncheckedUpdateManyWithoutUserNestedInput
-  owned_rooms?: Prisma.roomsUncheckedUpdateManyWithoutOwnerNestedInput
-}
-
 export type usersCreateWithoutNotesInput = {
   id?: string
   email: string
@@ -548,7 +455,6 @@ export type usersCreateWithoutNotesInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressCreateNestedManyWithoutUserInput
@@ -562,7 +468,6 @@ export type usersUncheckedCreateWithoutNotesInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressUncheckedCreateNestedManyWithoutUserInput
@@ -592,7 +497,6 @@ export type usersUpdateWithoutNotesInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUpdateManyWithoutUserNestedInput
@@ -606,7 +510,6 @@ export type usersUncheckedUpdateWithoutNotesInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUncheckedUpdateManyWithoutUserNestedInput
@@ -620,7 +523,6 @@ export type usersCreateWithoutNote_likesInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   notes?: Prisma.notesCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressCreateNestedManyWithoutUserInput
@@ -634,7 +536,6 @@ export type usersUncheckedCreateWithoutNote_likesInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressUncheckedCreateNestedManyWithoutUserInput
@@ -664,7 +565,6 @@ export type usersUpdateWithoutNote_likesInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUpdateManyWithoutUserNestedInput
@@ -678,7 +578,6 @@ export type usersUncheckedUpdateWithoutNote_likesInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUncheckedUpdateManyWithoutUserNestedInput
@@ -692,7 +591,6 @@ export type usersCreateWithoutOwned_roomsInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   notes?: Prisma.notesCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
@@ -706,7 +604,6 @@ export type usersUncheckedCreateWithoutOwned_roomsInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
@@ -736,7 +633,6 @@ export type usersUpdateWithoutOwned_roomsInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
@@ -750,7 +646,6 @@ export type usersUncheckedUpdateWithoutOwned_roomsInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
@@ -764,7 +659,6 @@ export type usersCreateWithoutRoom_membersInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   notes?: Prisma.notesCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressCreateNestedManyWithoutUserInput
@@ -778,7 +672,6 @@ export type usersUncheckedCreateWithoutRoom_membersInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
   user_progress?: Prisma.user_progressUncheckedCreateNestedManyWithoutUserInput
@@ -808,7 +701,6 @@ export type usersUpdateWithoutRoom_membersInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUpdateManyWithoutUserNestedInput
@@ -822,7 +714,6 @@ export type usersUncheckedUpdateWithoutRoom_membersInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
   user_progress?: Prisma.user_progressUncheckedUpdateManyWithoutUserNestedInput
@@ -836,7 +727,6 @@ export type usersCreateWithoutUser_progressInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsCreateNestedManyWithoutUserInput
   notes?: Prisma.notesCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersCreateNestedManyWithoutUserInput
@@ -850,7 +740,6 @@ export type usersUncheckedCreateWithoutUser_progressInput = {
   nickname?: string | null
   created_at?: Date | string
   updated_at?: Date | string
-  highlights?: Prisma.highlightsUncheckedCreateNestedManyWithoutUserInput
   notes?: Prisma.notesUncheckedCreateNestedManyWithoutUserInput
   note_likes?: Prisma.note_likesUncheckedCreateNestedManyWithoutUserInput
   room_members?: Prisma.room_membersUncheckedCreateNestedManyWithoutUserInput
@@ -880,7 +769,6 @@ export type usersUpdateWithoutUser_progressInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUpdateManyWithoutUserNestedInput
@@ -894,7 +782,6 @@ export type usersUncheckedUpdateWithoutUser_progressInput = {
   nickname?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  highlights?: Prisma.highlightsUncheckedUpdateManyWithoutUserNestedInput
   notes?: Prisma.notesUncheckedUpdateManyWithoutUserNestedInput
   note_likes?: Prisma.note_likesUncheckedUpdateManyWithoutUserNestedInput
   room_members?: Prisma.room_membersUncheckedUpdateManyWithoutUserNestedInput
@@ -907,7 +794,6 @@ export type usersUncheckedUpdateWithoutUser_progressInput = {
  */
 
 export type UsersCountOutputType = {
-  highlights: number
   notes: number
   note_likes: number
   room_members: number
@@ -916,7 +802,6 @@ export type UsersCountOutputType = {
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  highlights?: boolean | UsersCountOutputTypeCountHighlightsArgs
   notes?: boolean | UsersCountOutputTypeCountNotesArgs
   note_likes?: boolean | UsersCountOutputTypeCountNote_likesArgs
   room_members?: boolean | UsersCountOutputTypeCountRoom_membersArgs
@@ -932,13 +817,6 @@ export type UsersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
    * Select specific fields to fetch from the UsersCountOutputType
    */
   select?: Prisma.UsersCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UsersCountOutputType without action
- */
-export type UsersCountOutputTypeCountHighlightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.highlightsWhereInput
 }
 
 /**
@@ -984,7 +862,6 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   nickname?: boolean
   created_at?: boolean
   updated_at?: boolean
-  highlights?: boolean | Prisma.users$highlightsArgs<ExtArgs>
   notes?: boolean | Prisma.users$notesArgs<ExtArgs>
   note_likes?: boolean | Prisma.users$note_likesArgs<ExtArgs>
   room_members?: boolean | Prisma.users$room_membersArgs<ExtArgs>
@@ -1022,7 +899,6 @@ export type usersSelectScalar = {
 
 export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "nickname" | "created_at" | "updated_at", ExtArgs["result"]["users"]>
 export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  highlights?: boolean | Prisma.users$highlightsArgs<ExtArgs>
   notes?: boolean | Prisma.users$notesArgs<ExtArgs>
   note_likes?: boolean | Prisma.users$note_likesArgs<ExtArgs>
   room_members?: boolean | Prisma.users$room_membersArgs<ExtArgs>
@@ -1036,7 +912,6 @@ export type usersIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "users"
   objects: {
-    highlights: Prisma.$highlightsPayload<ExtArgs>[]
     notes: Prisma.$notesPayload<ExtArgs>[]
     note_likes: Prisma.$note_likesPayload<ExtArgs>[]
     room_members: Prisma.$room_membersPayload<ExtArgs>[]
@@ -1444,7 +1319,6 @@ readonly fields: usersFieldRefs;
  */
 export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  highlights<T extends Prisma.users$highlightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$highlightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$highlightsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notes<T extends Prisma.users$notesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$notesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$notesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   note_likes<T extends Prisma.users$note_likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$note_likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$note_likesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   room_members<T extends Prisma.users$room_membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$room_membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$room_membersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -1870,30 +1744,6 @@ export type usersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Limit how many users to delete.
    */
   limit?: number
-}
-
-/**
- * users.highlights
- */
-export type users$highlightsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the highlights
-   */
-  select?: Prisma.highlightsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the highlights
-   */
-  omit?: Prisma.highlightsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.highlightsInclude<ExtArgs> | null
-  where?: Prisma.highlightsWhereInput
-  orderBy?: Prisma.highlightsOrderByWithRelationInput | Prisma.highlightsOrderByWithRelationInput[]
-  cursor?: Prisma.highlightsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.HighlightsScalarFieldEnum | Prisma.HighlightsScalarFieldEnum[]
 }
 
 /**
