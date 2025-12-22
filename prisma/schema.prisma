@@ -29,7 +29,6 @@ model users {
   updated_at DateTime @updatedAt
 
   // relations
-  highlights    highlights[]
   notes         notes[]
   note_likes    note_likes[]
   room_members  room_members[]
@@ -62,33 +61,11 @@ model anchors {
   updated_at DateTime @updatedAt
 
   // relations
-  document   documents    @relation(fields: [document_id], references: [id], onDelete: Cascade)
-  highlights highlights[]
-  notes      notes[]
+  document documents @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  notes    notes[]
 
   @@unique([document_id, fingerprint])
   @@index([document_id])
-}
-
-model highlights {
-  id        String @id @default(cuid())
-  user_id   String
-  anchor_id String
-
-  start_offset Int?
-  end_offset   Int?
-
-  color String? // TODO: 추후 회의 거쳐서 enum/type으로 바뀔 여지 있음
-
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  // relations
-  user   users   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  anchor anchors @relation(fields: [anchor_id], references: [id], onDelete: Cascade)
-
-  @@index([user_id])
-  @@index([anchor_id])
 }
 
 model notes {
@@ -97,10 +74,12 @@ model notes {
   anchor_id String
   content   String
 
+  start_offset Int?
+  end_offset   Int?
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  // relations
   user       users        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   anchor     anchors      @relation(fields: [anchor_id], references: [id], onDelete: Cascade)
   note_likes note_likes[]

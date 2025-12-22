@@ -392,7 +392,6 @@ export const ModelName = {
   users: 'users',
   documents: 'documents',
   anchors: 'anchors',
-  highlights: 'highlights',
   notes: 'notes',
   note_likes: 'note_likes',
   rooms: 'rooms',
@@ -413,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "documents" | "anchors" | "highlights" | "notes" | "note_likes" | "rooms" | "room_members" | "user_progress"
+    modelProps: "users" | "documents" | "anchors" | "notes" | "note_likes" | "rooms" | "room_members" | "user_progress"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -636,80 +635,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.anchorsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AnchorsCountAggregateOutputType> | number
-        }
-      }
-    }
-    highlights: {
-      payload: Prisma.$highlightsPayload<ExtArgs>
-      fields: Prisma.highlightsFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.highlightsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.highlightsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        findFirst: {
-          args: Prisma.highlightsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.highlightsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        findMany: {
-          args: Prisma.highlightsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>[]
-        }
-        create: {
-          args: Prisma.highlightsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        createMany: {
-          args: Prisma.highlightsCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.highlightsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>[]
-        }
-        delete: {
-          args: Prisma.highlightsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        update: {
-          args: Prisma.highlightsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        deleteMany: {
-          args: Prisma.highlightsDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.highlightsUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.highlightsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>[]
-        }
-        upsert: {
-          args: Prisma.highlightsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$highlightsPayload>
-        }
-        aggregate: {
-          args: Prisma.HighlightsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateHighlights>
-        }
-        groupBy: {
-          args: Prisma.highlightsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HighlightsGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.highlightsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HighlightsCountAggregateOutputType> | number
         }
       }
     }
@@ -1158,25 +1083,13 @@ export const AnchorsScalarFieldEnum = {
 export type AnchorsScalarFieldEnum = (typeof AnchorsScalarFieldEnum)[keyof typeof AnchorsScalarFieldEnum]
 
 
-export const HighlightsScalarFieldEnum = {
-  id: 'id',
-  user_id: 'user_id',
-  anchor_id: 'anchor_id',
-  start_offset: 'start_offset',
-  end_offset: 'end_offset',
-  color: 'color',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type HighlightsScalarFieldEnum = (typeof HighlightsScalarFieldEnum)[keyof typeof HighlightsScalarFieldEnum]
-
-
 export const NotesScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   anchor_id: 'anchor_id',
   content: 'content',
+  start_offset: 'start_offset',
+  end_offset: 'end_offset',
   created_at: 'created_at',
   updated_at: 'updated_at'
 } as const
@@ -1422,7 +1335,6 @@ export type GlobalOmitConfig = {
   users?: Prisma.usersOmit
   documents?: Prisma.documentsOmit
   anchors?: Prisma.anchorsOmit
-  highlights?: Prisma.highlightsOmit
   notes?: Prisma.notesOmit
   note_likes?: Prisma.note_likesOmit
   rooms?: Prisma.roomsOmit
