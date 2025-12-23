@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 
-type RoomRecord = {
+type Room = {
   roomId: string;
   token: string;
   targetUrl: string;
@@ -10,17 +10,17 @@ type RoomRecord = {
 
 @Injectable()
 export class RoomsService {
-  private byToken = new Map<string, RoomRecord>();
+  private roomsByToken = new Map<string, Room>();
 
   createRoom(targetUrl: string) {
     const roomId = randomUUID();
     const token = randomUUID().replace(/-/g, '');
-    const rec: RoomRecord = { roomId, token, targetUrl, createdAt: Date.now() };
-    this.byToken.set(token, rec);
-    return rec;
+    const roomRecord: Room = { roomId, token, targetUrl, createdAt: Date.now() };
+    this.roomsByToken.set(token, roomRecord);
+    return roomRecord;
   }
 
-  getByToken(token: string) {
-    return this.byToken.get(token) ?? null;
+  getRoomByToken(token: string) {
+    return this.roomsByToken.get(token) ?? null;
   }
 }
