@@ -1,4 +1,5 @@
-import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RoomsService } from './rooms.service.js';
 
@@ -31,9 +32,9 @@ export class RoomsController {
   getShare(@Param('token') token: string) {
     const roomRecord = this.rooms.getRoomByToken(token);
     if (!roomRecord) {
-      return { ok: false, error: 'Invalid token' };
-    } else {
-      return { ok: true, roomId: roomRecord.roomId, targetUrl: roomRecord.targetUrl };
+      throw new NotFoundException('Invalid token');
     }
+
+    return { roomId: roomRecord.roomId, targetUrl: roomRecord.targetUrl };
   }
 }
