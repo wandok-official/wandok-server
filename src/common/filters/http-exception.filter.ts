@@ -23,8 +23,26 @@ export class HttpExceptionFilter implements ExceptionFilter {
         message = res;
       } else if (typeof res === 'object' && res !== null) {
         const r = res as Record<string, unknown>;
-        message = typeof r.message === 'string' ? r.message : message;
-        details = r.message ?? null;
+
+        const rawMessage = r.message;
+        const rawError = r.error;
+
+        // message
+        if (typeof rawMessage === 'string') {
+          message = rawMessage;
+          details = null; // 중복 방지
+        } else if (Array.isArray(rawMessage)) {
+          // ValidationPipe 케이스
+          message = typeof rawError === 'string' ? rawError : 'Bad request';
+          details = rawMessage;
+        } else if (typeof rawMessage === 'object' && rawMessage !== null) {
+          message = typeof rawError === 'string' ? rawError : 'Bad request';
+          details = rawMessage;
+        } else {
+          // message가 없거나 예상 못한 타입이면 error 필드 활용
+          message = typeof rawError === 'string' ? rawError : message;
+          details = null;
+        }
       }
 
       switch (status) {
