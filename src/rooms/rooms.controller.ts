@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RoomsService } from './rooms.service.js';
 
@@ -10,8 +10,13 @@ export class RoomsController {
   ) {}
 
   @Post('rooms')
-  create(@Body() body: { targetUrl: string }) {
-    const roomRecord = this.rooms.createRoom(body.targetUrl);
+  create(@Body() body: { targetUrl?: string }) {
+    const targetUrl = body?.targetUrl?.trim();
+    if (!targetUrl) {
+      throw new BadRequestException('targetUrl is required');
+    }
+
+    const roomRecord = this.rooms.createRoom(targetUrl);
     const webBaseUrl = this.config.get<string>('WEB_BASE_URL') ?? 'http://localhost:5173';
 
     return {
