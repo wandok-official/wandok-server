@@ -29,7 +29,7 @@ export class RoomsController {
   }
 
   @Get('share/:token')
-  getShare(@Param('token') token: string) {
+  getInviteInfoByToken(@Param('token') token: string) {
     const roomRecord = this.rooms.getRoomByToken(token);
     if (!roomRecord) {
       throw new NotFoundException('Invalid token');
