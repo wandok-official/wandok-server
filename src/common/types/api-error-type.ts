@@ -1,10 +1,12 @@
+import type { ErrorCode } from './error-code.js';
+
 export type ApiSuccessResponse<T> = {
   ok: true;
   data: T;
 };
 
 export type ApiError = {
-  code: string;
+  code: ErrorCode;
   message: string;
   details?: unknown;
 };
