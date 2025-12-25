@@ -47,12 +47,14 @@ export class UsersService {
    * 사용자 조회 후 없으면 생성 (OAuth 로그인용)
    */
   async findOrCreate(email: string, nickname: string): Promise<users> {
-    const existingUser = await this.findByEmail(email);
-
-    if (existingUser) {
-      return existingUser;
-    }
-
-    return this.create({ email, nickname });
+    return this.prisma.users.upsert({
+      where: { email },
+      update: {},
+      create: {
+        email,
+        nickname,
+        password: null,
+      },
+    });
   }
 }
