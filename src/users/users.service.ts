@@ -31,6 +31,30 @@ export class UsersService {
   }
 
   /**
+   * ID로 사용자 조회 (인증용 - 필요한 필드만)
+   */
+  async findByIdForAuth(id: string): Promise<{ id: string; email: string; nickname: string }> {
+    const user = await this.prisma.users.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        nickname: true,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      nickname: user.nickname || '',
+    };
+  }
+
+  /**
    * 새 사용자 생성 (OAuth용 - password는 null)
    */
   async create(data: { email: string; nickname: string }): Promise<users> {
