@@ -5,6 +5,7 @@ import { AppService } from './app.service.js';
 import { HealthcheckController } from './health/health.controller.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { RoomsModule } from './rooms/rooms.module.js';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AuthModule } from './auth/auth.module.js';
     }),
     UsersModule,
     AuthModule,
+    RoomsModule,
   ],
   controllers: [AppController, HealthcheckController],
   providers: [AppService],
