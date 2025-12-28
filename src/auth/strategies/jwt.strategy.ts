@@ -3,6 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '../../users/users.service.js';
+import { getAuthConfig } from '../config/auth.config.js';
 
 interface JwtPayload {
   sub: string; // Subject: 사용자 ID
@@ -16,9 +17,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     private readonly configService: ConfigService,
     private readonly usersService: UsersService
   ) {
+    const authConfig = getAuthConfig(configService);
+
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: configService.get<string>('JWT_SECRET')!,
+      secretOrKey: authConfig.secret,
     });
   }
 

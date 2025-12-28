@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller.js';
 import { JwtStrategy } from './strategies/jwt.strategy.js';
 import { UsersModule } from '../users/users.module.js';
+import { getAuthConfig } from './config/auth.config.js';
 
 @Module({
   imports: [
@@ -12,26 +13,11 @@ import { UsersModule } from '../users/users.module.js';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService): JwtModuleOptions => {
-        const secret = configService.get<string>('JWT_SECRET');
-        const expiresIn = configService.get<string>('JWT_EXPIRATION');
-
-        if (!secret) {
-          throw new Error(
-            'JWT_SECRET is not defined in environment variables. ' +
-              'Please set JWT_SECRET in your .env file.'
-          );
-        }
-
-        if (!expiresIn) {
-          throw new Error(
-            'JWT_EXPIRATION is not defined in environment variables. ' +
-              'Please set JWT_EXPIRATION in your .env file (e.g., "7d", "24h").'
-          );
-        }
+        const authConfig = getAuthConfig(configService);
 
         return {
-          secret,
-          signOptions: { expiresIn },
+          secret: authConfig.secret,
+          signOptions: { expiresIn: authConfig.expiresIn },
         } as JwtModuleOptions;
       },
     }),
