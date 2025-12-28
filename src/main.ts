@@ -17,7 +17,11 @@ async function bootstrap() {
     })
   );
   app.enableCors({
-    origin: true,
+    origin: [
+      /^chrome-extension:\/\/[a-z]{32}$/, // Chrome Extension ID 패턴
+      'http://localhost:5173', // 개발용 웹 서버
+      'http://localhost:3000', // 개발용 API 테스트
+    ],
     credentials: true,
   });
 
