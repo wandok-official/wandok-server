@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma.service.js';
 import { users } from '../generated/prisma/client.js';
 
@@ -28,6 +28,30 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  /**
+   * ID로 사용자 조회 (인증용 - 필요한 필드만)
+   */
+  async findByIdForAuth(id: string): Promise<{ id: string; email: string; nickname: string }> {
+    const user = await this.prisma.users.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        nickname: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+
+    return {
+      id: user.id,
+      email: user.email,
+      nickname: user.nickname || '',
+    };
   }
 
   /**
