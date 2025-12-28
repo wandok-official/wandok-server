@@ -8,6 +8,8 @@ export interface AuthConfig {
   secret: string;
   /** JWT 토큰 만료 시간 (예: "7d", "24h") */
   expiresIn: string;
+  /** Google OAuth Client ID */
+  googleClientId: string;
 }
 
 /**
@@ -21,6 +23,7 @@ export interface AuthConfig {
 export const getAuthConfig = (configService: ConfigService): AuthConfig => {
   const secret = configService.get<string>('JWT_SECRET');
   const expiresIn = configService.get<string>('JWT_EXPIRATION');
+  const googleClientId = configService.get<string>('GOOGLE_CLIENT_ID');
 
   if (!secret) {
     throw new Error(
@@ -36,8 +39,16 @@ export const getAuthConfig = (configService: ConfigService): AuthConfig => {
     );
   }
 
+  if (!googleClientId) {
+    throw new Error(
+      'GOOGLE_CLIENT_ID is not defined in environment variables. ' +
+        'Please set GOOGLE_CLIENT_ID in your .env file.'
+    );
+  }
+
   return {
     secret,
     expiresIn,
+    googleClientId,
   };
 };
