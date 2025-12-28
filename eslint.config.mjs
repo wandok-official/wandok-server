@@ -1,7 +1,6 @@
 // @ts-check
 import eslint from '@eslint/js';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-import stylistic from '@stylistic/eslint-plugin'; // 추가됨
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -18,9 +17,6 @@ export default tseslint.config(
 
   // [3] 공통 설정 및 플러그인 정의
   {
-    plugins: {
-      '@stylistic': stylistic,
-    },
     languageOptions: {
       globals: {
         ...globals.node,
@@ -66,18 +62,6 @@ export default tseslint.config(
         'warn',
         { prefer: 'type-imports' },
       ],
-
-      '@stylistic/semi': ['error', 'always'],
-      '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/eol-last': ['error', 'always'],
-      '@stylistic/max-len': ['error', { 'code': 100 }],
-      '@stylistic/comma-dangle': ['error', {
-        'arrays': 'always-multiline',
-        'objects': 'always-multiline',
-        'imports': 'never',
-        'functions': 'never',
-      }],
 
       /* =========================================
          [Prettier 관련]
