@@ -30,6 +30,7 @@ export class AuthService {
         throw new UnauthorizedException('Email not found in Google token');
       }
 
+      // Note: fetch API는 Node.js 18+ 환경에서 기본 제공됩니다.
       const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
         headers: {
           Authorization: `Bearer ${token}`,
