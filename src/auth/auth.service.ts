@@ -30,10 +30,11 @@ export class AuthService {
         throw new UnauthorizedException('Email not found in Google token');
       }
 
-      // Google API에서 사용자 프로필 정보 가져오기
-      const response = await fetch(
-        `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${token}`
-      );
+      const response = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.ok) {
         throw new UnauthorizedException('Failed to fetch user info from Google');
