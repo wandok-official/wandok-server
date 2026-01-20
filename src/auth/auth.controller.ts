@@ -29,8 +29,7 @@ export class AuthController {
       throw new BadRequestException('Authorization header missing or invalid');
     }
 
-    // Bearer 토큰 추출
-    const token = authorization.replace('Bearer ', '');
+    const token = authorization.replace(/^Bearer\s+/i, '');
     if (!token || token === authorization) {
       throw new BadRequestException('Authorization header missing or invalid');
     }
