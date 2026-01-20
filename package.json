@@ -113,6 +113,9 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
     ]
   },
   "type": "module"
